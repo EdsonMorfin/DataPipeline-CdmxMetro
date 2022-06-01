@@ -1,4 +1,5 @@
 import requests
+from database_sender import *
 from geopy.geocoders import Nominatim
 
 api_url ="https://datos.cdmx.gob.mx/api/3/action/datastore_search?resource_id=ad360a0e-b42f-482c-af12-1fd72140032e&limit=5"
@@ -38,6 +39,7 @@ def append_address():
         address_keys,address_names = get_address(records[i]['geographic_point'])
         for x in range (len(address_names)):
             records[i][address_keys[x]] = address_names[address_keys[x]]
+        insert_metro_values(records[i])
 
 
 append_address()
