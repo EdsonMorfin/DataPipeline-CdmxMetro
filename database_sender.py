@@ -65,15 +65,15 @@ def create_table():
     """)
     connection = None
     try:
-        connection,cursor=(open_connection)
+        connection,cursor=open_connection()
         cursor.execute(commands)
-        cursor.close()
         connection.commit()
+        cursor.close()
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
         if connection is not None:
-            close_connection(cursor,connection)
+            close_connection(connection)
 
 def insert_metro_values(record):
     connection,cursor = open_connection()
