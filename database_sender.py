@@ -11,6 +11,11 @@ def close_connection(connection):
         print("PostgreSQL connection is closed")
 
 def open_connection():
+    """Open postgress conection getting keys from .env file
+
+    Returns:
+        connection,curser used for postgresql operations
+    """
     try:
         # Connect to an existing database
         connection = psycopg2.connect(user=os.getenv("USER"),
@@ -36,6 +41,9 @@ def open_connection():
 
 
 def create_table():
+    """
+    Create initial table, pass if it exist
+    """
 
     commands = (
     """
@@ -66,8 +74,12 @@ def create_table():
     connection = None
     try:
         connection,cursor=open_connection()
-        cursor.execute(commands)
-        connection.commit()
+        cursor.execute("select exists(select * from information_schema.tables where table_name=%s)", ('metro_position',))
+        a = cursor.fetchone()[0]
+        if a != True:
+            print("Table already exist")
+            cursor.execute(commands)
+            connection.commit()
         cursor.close()
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
@@ -76,14 +88,18 @@ def create_table():
             close_connection(connection)
 
 def insert_metro_values(record):
+    """ Insert metro api response into postgresql table
+
+    Args:
+        record (dict): _description_
+    """
     connection,cursor = open_connection()
     keys,values = '',''
     for x in record:
-        if x != "_id":
+        if x != "_id": #Pass initial value
 
-            record[x]= ((record[x].replace("T", " ").replace(".000Z", ""))) if (x =='date_updated') else record[x]
-            record[x] = 0 if (record[x]==None) else record[x]
-
+            record[x]= ((record[x].replace("T", " ").replace(".000Z", ""))) if (x =='date_updated') else record[x] ## convert datetime into string
+            record[x] = 0 if (record[x]==None) else record[x] # convert None into 0
             keys+= x + ',' # Add a final comma
             values += "'"+str(record[x])+"'"+',' #Add ' and a final comma
 
@@ -92,3 +108,5 @@ def insert_metro_values(record):
     connection.commit()
     cursor.close()
     close_connection(connection)
+
+create_table()
