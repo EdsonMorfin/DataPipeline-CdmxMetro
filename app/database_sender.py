@@ -16,6 +16,11 @@ def open_connection():
     Returns:
         connection,curser used for postgresql operations
     """
+    connection = psycopg2.connect(user=os.getenv("USER"),
+                            password=os.getenv("PASSWORD"),
+                            host=os.getenv("HOST"),
+                            port=os.getenv("PORT"),
+                            database=os.getenv("DATABASE"))
     try:
         # Connect to an existing database
         connection = psycopg2.connect(user=os.getenv("USER"),
@@ -34,6 +39,7 @@ def open_connection():
         # Fetch result
         record = cursor.fetchone()
         print("You are connected to - ", record, "\n")
+        return connection,cursor
 
     except (Exception, Error) as error:
         print("Error while connecting to PostgreSQL", error)

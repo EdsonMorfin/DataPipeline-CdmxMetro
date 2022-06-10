@@ -1,4 +1,6 @@
 fastapi
-dotenv
+python-dotenv==0.15.0
 psycopg2
-geopy.geocoders
+geopy
+uvicorn
+requests

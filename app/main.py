@@ -41,5 +41,7 @@ def append_address():
             records[i][address_keys[x]] = address_names[address_keys[x]]
         insert_metro_values(records[i])
 
-create_table()
-append_address()
+if __name__ == "__main__":
+    create_table()
+    append_address()
+    print("PENEEEE")

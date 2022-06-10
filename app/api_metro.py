@@ -2,7 +2,7 @@ from sqlite3 import Timestamp
 from fastapi import FastAPI
 from dotenv import load_dotenv
 import json
-from database_sender import open_connection,close_connection
+from app.utils.database_sender import open_connection,close_connection
 app = FastAPI()
 load_dotenv()
 
