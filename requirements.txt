@@ -1,0 +1,4 @@
+fastapi
+dotenv
+psycopg2
+geopy.geocoders
