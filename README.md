@@ -20,4 +20,18 @@ It gets the position of CDMX Metro with his Delegation
  Get Metro units that are in certain alcaldia with given name:
  - http://127.0.0.1:8000/units/alcaldia/{alcaldia_name}
 
+## State machine diagram
+![Untitled](https://user-images.githubusercontent.com/73849076/173126970-b5ae6246-8085-4e51-a5f5-e045ff22c946.png)
+
+## Data Modeling
+ ERD
+![image](https://user-images.githubusercontent.com/73849076/173127994-1c6c17bd-0e36-48f9-9f1c-bbdb2d1d1522.png)
+DLL
+![image](https://user-images.githubusercontent.com/73849076/173128212-e3183d7b-34fe-4526-a9bc-bef5ebd378ec.png)
+![image](https://user-images.githubusercontent.com/73849076/173128337-0767fb7f-a1b6-4192-ad59-61cd0a11342a.png)
+
+
+
+
+
 
