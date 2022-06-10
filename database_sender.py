@@ -47,7 +47,7 @@ def create_table():
 
     commands = (
     """
-    CREATE TABLE metro_position(
+    CREATE TABLE metro_position(database_sende
         _id SERIAL PRIMARY KEY,
         id SMALLINT,
         date_updated 	TIMESTAMP,
@@ -108,5 +108,3 @@ def insert_metro_values(record):
     connection.commit()
     cursor.close()
     close_connection(connection)
-
-create_table()
